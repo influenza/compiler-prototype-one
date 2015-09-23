@@ -64,8 +64,7 @@ echo \
  Prefix: '${prefix}'.
  Compiler: '${CC} ${CFLAGS} ${CPPFLAGS}'
 
- Package features:
-   Cache alignment: ${CACHE_COHERENT_ALIGNMENT:-no}
+ Package features: N/A
 
  Now type 'make @<:@<target>@:>@'
    where the optional <target> is:

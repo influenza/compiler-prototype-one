@@ -1,4 +1,13 @@
 # Autotools cruft
+COPYING
+Makefile.in
+aclocal.m4
+autom4te.cache/
+compile
+config.h.in
+configure
+install-sh
+missing
 
 # Vim swap files
 *.swp

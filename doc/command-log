@@ -1,0 +1,12 @@
+Because I always forget this stuff.
+
+Start with a project containing required files:
+  Makefile.am - specify source dirs
+  configure.ac - tweak a skeleton for the project
+  m4/ - (possibly empty) dir to hold local macro defs
+  NEWS README AUTHORS ChangeLog - req'd by autoconf
+
+Then:
+
+1. Edit configure.ac to match the project details
+  autoreconf -i
