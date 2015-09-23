@@ -1,0 +1,6 @@
+# Autotools cruft
+
+# Vim swap files
+*.swp
+*.swo
+*.swn
