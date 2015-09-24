@@ -14,14 +14,9 @@ AC_CONFIG_MACRO_DIR([m4/])
 # Verify the compile and install script are present
 AC_PROG_CC([gcc])
 AC_PROG_INSTALL
+AC_PROG_YACC
+AC_PROG_LEX
 AC_PROG_RANLIB
-
-# Make sure we can use the gnu99 standard -std=gnu99
-AX_CHECK_COMPILE_FLAG([-std=gnu11], [CFLAGS+=" -std=gnu11"], AC_MSG_ERROR([
-  **************************************************************************
-  **** The gnu99 standard is required for this project. See config.log  ****
-  **** for more information.                                            ****
-  **************************************************************************]))
 
 AC_CHECK_LIB([m], [cos],[],
     AC_MSG_ERROR([
@@ -53,7 +48,8 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([bzero memmove strerror])
 
 AC_CONFIG_FILES([Makefile
-                 src/Makefile])
+                 src/Makefile
+                 src/scanner/Makefile])
 AC_OUTPUT
 
 echo \

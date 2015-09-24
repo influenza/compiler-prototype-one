@@ -1,15 +1,34 @@
 # Autotools cruft
-COPYING
-Makefile.in
 aclocal.m4
 autom4te.cache/
 compile
+config.h
 config.h.in
+config.h.in*
+config.log
+config.status
 configure
+COPYING
+depcomp
 install-sh
+Makefile.in
 missing
+stamp-h1
+ylwrap
+**/Makefile
+**/Makefile.in
+**/.deps
+
+# Build objects
+**/*.o
+**/*.a
+
 
 # Vim swap files
 *.swp
 *.swo
 *.swn
+
+# Derived flex / bison artifacts
+src/scanner/scl.c
+src/scanner/scl.h
