@@ -1,9 +1,12 @@
 /* scanner for Stanson Clinical Logic files */
 
+%option noyywrap yylineno
+
 %{
-/* need this for the call to atof() below */
-#include "scl.tab.h"
+#include "scl.h"
 void count();
+
+void scan_file(FILE *file);
 %}
 
 D [0-9]
@@ -89,4 +92,10 @@ void count()
     }
   }
   ECHO;
+}
+
+void scan_file(FILE *file)
+{
+  yyin = file;
+  yylex();
 }

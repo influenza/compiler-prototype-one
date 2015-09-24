@@ -1,3 +1,9 @@
-#include <stdio.h>
+#ifndef SCANNER_H_INCLUDED
+#define SCANNER_H_INCLUDED
 
-void perform_scan(FILE file);
+#include <stdio.h>
+#include "scl.h"
+
+void perform_scan(FILE *file);
+
+#endif

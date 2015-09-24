@@ -1,6 +1,8 @@
 #include "scanner.h"
 
-void perform_scan(FILE file)
-{
+extern int scan_file(FILE *);
 
+void perform_scan(FILE *file)
+{
+  scan_file(file);
 }
