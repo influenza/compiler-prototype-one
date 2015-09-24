@@ -1,4 +1,5 @@
 #include "scanner.h"
+#include "scl_parser.h"
 
 extern int scan_file(FILE *);
 

@@ -22,6 +22,7 @@ ylwrap
 # Build objects
 **/*.o
 **/*.a
+src/sclc
 
 
 # Vim swap files
@@ -30,5 +31,7 @@ ylwrap
 *.swn
 
 # Derived flex / bison artifacts
-src/scanner/scl.c
-src/scanner/scl.h
+src/scanner/scl_parser.h
+src/scanner/scl_parser.c
+src/scanner/scl_scanner.c
+

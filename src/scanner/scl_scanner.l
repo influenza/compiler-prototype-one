@@ -2,15 +2,16 @@
 
 %option noyywrap yylineno
 
-%{
-#include "scl.h"
-void count();
-
-void scan_file(FILE *file);
-%}
 
 D [0-9]
 A [a-zA-Z_]
+
+%{
+#include "scl_parser.h"
+
+void count();
+
+%}
 
 %%
 
@@ -74,8 +75,6 @@ A [a-zA-Z_]
 
 %%
 
-int yywrap() { return(1); }
-
 int column = 0;
 
 void count()
@@ -94,8 +93,3 @@ void count()
   ECHO;
 }
 
-void scan_file(FILE *file)
-{
-  yyin = file;
-  yylex();
-}

@@ -1,6 +1,5 @@
 %{
 
-#include "scl.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -8,6 +7,8 @@ extern int yylex(void);
 
 extern char yytext[];
 extern int column;
+
+void scan_file(FILE *file);
 
 int yyerror(char *s) {
   fflush(stdout);
@@ -142,4 +143,14 @@ composite:
          ;
 
 %%
+#include <stdio.h>
 
+extern FILE *yyin;
+
+void scan_file(FILE *file)
+{
+  yyin = file;
+  do {
+    yyparse();
+  } while (!feof(yyin));
+}
