@@ -3,9 +3,6 @@
 %option noyywrap yylineno
 
 
-D [0-9]
-A [a-zA-Z_]
-
 %{
 #include "scl_parser.h"
 
@@ -18,18 +15,24 @@ void count();
 \"[^"]*\" { /* Consume string body */
   count(); return(STRING_LITERAL);
 }
+"true"    { count(); return(LITERAL_TRUE); }
+"false"    { count(); return(LITERAL_FALSE); }
+[0-9]+      { count(); return(NUMBER_LITERAL); } /* Scientific notation is not supported */
+[0-9]+"."[0-9]*   { count(); return(NUMBER_LITERAL); }
 
-"any"         { count(); return(ANY); }
-"all"         { count(); return(ALL); }
-"when"        { count(); return(WHEN); }
-"Alert"       { count(); return(ALERT); }
-"display"     { count(); return(DISPLAY); }
-"print"       { count(); return(PRINT); }
-{D}+          { count(); return(CONSTANT); }
-{D}+"."{D}*   { count(); return(CONSTANT); }
-
-{D}{4}-{D}{2}-{D}{2}_{D}{2}:{D}{2}:{D}{2} { count(); return(CONSTANT); }
-
+"aggregate" { count(); return(TYPE_AGGREGATE); }
+"string"  { count(); return(TYPE_STRING); }
+"number"  { count(); return(TYPE_NUMBER); }
+"boolean" { count(); return(TYPE_BOOL); }
+"type"    { count(); return(TYPE); }
+"monitor" { count(); return(MONITOR); }
+"given"   { count(); return(GIVEN); }
+"when"    { count(); return(WHEN); }
+"then"    { count(); return(THEN); }
+"all"     { count(); return(ALL); }
+"any"     { count(); return(ANY); }
+"except"  { count(); return(EXCEPT); }
+"show"    { count(); return(SHOW); }
 
 "."           { count(); return('.'); }
 ","           { count(); return(','); }
@@ -38,6 +41,7 @@ void count();
 "*"           { count(); return('*'); }
 "/"           { count(); return('/'); }
 "%"           { count(); return('%'); }
+"←"           { count(); return('←'); }
 "="           { count(); return('='); }
 "<"           { count(); return('<'); }
 ">"           { count(); return('>'); }
@@ -50,7 +54,7 @@ void count();
 "and"         { count(); return(AND_OP); }
 "or"          { count(); return(OR_OP); }
 
-{A}({A}|{D})* { count(); return(IDENTIFIER); }
+[a-zA-Z]([a-zA-Z]|[0-9])* { count(); return(IDENTIFIER); }
 
 "[" { count(); return('['); }
 "]" { count(); return(']'); }
@@ -68,8 +72,8 @@ void count();
     "\\0"   return('\0');
 }
 
-
 "//[^\n]*"  {/* eat up one-line comments */ }
+
 [ \t\v\n\f] { count(); }
 .           { /* ignore bad chars */ }
 
