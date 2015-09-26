@@ -1,0 +1,157 @@
+2015-09-25
+
+	9:33 PM
+Open question for content building folks: Is your mental model when building a new intervention more like (options follow)
+Scott Kubomoto
+9:33 PM
+ok go for it. shoot.
+bob bot
+9:33 PM
+http://weknowmemes.com/generator/uploads/generated/g1381159009196981166.jpg
+
+Image hidden
+Ronald Dahlgren
+9:34 PM
+1. Select a pretty specific set of possible patient data (diagnosis is such and such etc), then remove exception cases (but not X or Y)
+2. More traditional logic of "If this and that or those, then ..."
+3. Something else entirely
+Scott Kubomoto
+9:34 PM
+you're talking about when we design the logic for an alert, from scratch?
+Ronald Dahlgren
+9:34 PM
+also I see an emerging market in oral hygiene for gophers
+bob bot
+9:34 PM
+http://tedder.me/lols/picard-make-it-so-deploy.jpg
+
+Image hidden
+Ronald Dahlgren
+9:35 PM
+right
+you have a new guideline or recommendation before you, and you're about to start the process of translating it into something the cms can use
+Scott Kubomoto
+9:36 PM
+I'd say mostly probably 1.
+Ronald Dahlgren
+9:36 PM
+excellent thanks
+bob bot
+9:36 PM
+http://tedder.me/lols/excellent-mr-burns.gif
+
+Image hidden
+Ronald Dahlgren
+9:36 PM
+omg bob
+Scott Kubomoto
+9:37 PM
+I suppose though, that's partly because the CMS intervention editor is set up that way
+Ronald Dahlgren
+9:38 PM
+so I'm interested in the more pure case I guess?
+if you could imagine no specific tool existed
+I remember spreadsheets back in early 2014 that had "if this then that" sort of logic in them
+Scott Kubomoto
+9:38 PM
+ah right...hmmm
+Scott Kubomoto
+9:40 PM
+Well i think a lot of this is also subtly influenced by the way Epic is set up as well
+Ronald Dahlgren
+9:40 PM
+we've got much more experience with turning content into actionable CDS logic, so I'm just curious about how well the model we chose works
+of course
+and Cerner has a similar model
+and our internal alert engine as well
+Scott Kubomoto
+9:40 PM
+I think the current model makes sense for trying to figure out when an alert should pop-up under which clinical criteria
+1. is a bit simpler than 2.
+in that sense
+Ronald Dahlgren
+9:41 PM
+right - I can appreciate that. I can almost think of it geometrically as a venn diagram
+Scott Kubomoto
+9:42 PM
+I think it simplifies things a bit to think of "inclusion criteria" and "exclusion" criteria and that probably mirrors the clinical thought process for one specific alert
+Ronald Dahlgren
+9:42 PM
+include this big circle, then subtract these shapes out of it, if the current situation exists in the remaining parts, fire!
+Scott Kubomoto
+9:42 PM
+with a "specific alert" being something that identifies a "specific clinical scenario"
+Ronald Dahlgren
+9:43 PM
+so the really high level place I started from was defining CDS as "providing timely and helpful best practice advice"
+Scott Kubomoto
+9:43 PM
+I think in the long run though if you really want to design more complex CDS you need a different setup
+Ronald Dahlgren
+9:43 PM
+and then I defined some of the ambiguous stuff there and was trying to figure out how best to model the actual particulars of the clinical logic behind the advice
+Scott Kubomoto
+9:43 PM
+for example you could see a world where we build more of a decision tree type of CDS
+Ronald Dahlgren
+9:43 PM
+go on
+Ronald Dahlgren
+9:45 PM
+what we have currently is almost like a decision tree that only contains two leaves - do nothing or fire the specific intervention. You are describing something that might have many interventions existing as leaf nodes on the tree?
+Scott Kubomoto
+9:45 PM
+IF patient has these characteristics and doctor orders X then offer choices 1-5. If doctor answers "yes" to #1 then suggest medication A. If doctor answers yes to #1 then ask questions 6-7......etc
+Ronald Dahlgren
+9:45 PM
+is see - so more flexibility in the actions to take
+Scott Kubomoto
+9:46 PM
+you can see where this would get quite complex quite quickly and the way it's set up right now, we wouldn't be able to design this type of CDS
+Ronald Dahlgren
+9:46 PM
+flexibility and describing an interaction with the provider
+Scott Kubomoto
+9:46 PM
+I think doctors would love this type of CDS.....but the logic is at least 10x more complex than one of our existing single alerts
+Ronald Dahlgren
+9:47 PM
+so in the sample above, maybe the 'had these characteristics' would still be expressed as include/exclude?
+then the action path would follow a traditional control flow
+Scott Kubomoto
+9:48 PM
+possibly
+medical people like to think of this kind of decision making in terms of a "decision tree"
+which simplifies things a bit
+Ronald Dahlgren
+9:49 PM
+so my object-oriented brain is thinking maybe that could be a class of patients. But each CDS piece would likely target a different group right?
+^-- still thinking on the 'had these characteristics' part
+given that it's by far the most complex piece of our content right now
+Scott Kubomoto
+9:49 PM
+but I don't think decisions in the real world are made in this sort of if then type of branching
+Ronald Dahlgren
+9:49 PM
+hmm
+Scott Kubomoto
+9:50 PM
+what are you trying to make?
+Ronald Dahlgren
+9:50 PM
+I'm sort of prototyping a CDS language
+as a fun side project to learn about building compilers ^_^
+if it turns out to be something useful, it could someday sit in the middle of the CMS between the UI and the generated artifacts for epic, cerner, etc
+Scott Kubomoto
+9:51 PM
+right
+Ronald Dahlgren
+9:51 PM
+and if not, I've gained some deeper understanding of the class of problems the transformation engine has to address
+Scott Kubomoto
+9:52 PM
+sure, happy to talk more about at a later time. I think it's a whole other discussion about how medical decisions are made, and therefore, whats the best way to either approximate that or augment that
+gotta go now though
+Ronald Dahlgren
+9:52 PM
+of course, thank you very much for the insight!

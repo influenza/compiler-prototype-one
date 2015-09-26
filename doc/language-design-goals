@@ -1,0 +1,80 @@
+What is SCL trying to describe?
+
+A language for specifying clinical decision support.
+
+What is clinical decision support? Providing timely and helpful best practice advice
+
+How is it provided? Through an intervention mechanism - some way of interrupting a user
+  that is about to do something questionable, provide some information about the situation
+  and suggest a course of action.
+
+How is it timely? Through clever insertion into the clinical workflow and with the use
+  of override reasons which will "lock out" the alert from triggering again for some
+  time period.
+
+How is it focused? Through specific interrogation of the patient data and action details
+  to determine if the encoded advice is actually applicable.
+
+The best practice will inspect a relevant action occuring in the clinical environment,
+  then if the particulars of the situation are a match, it will intervene.
+
+With these things in mind, a compiled SCL program will respond to certain events,
+  interrogate available data, and perform some action
+
+---------------------------------------------------------------------------------------
+
+INTERVENTION DEFINITION:
+
+type Alert {
+  maintext: text
+  otherstuff: text
+}
+
+given alert1: Alert ← {
+  maintext ← "blah blah linebreaks html unicode whatever"
+  otherstuff ← "is set here"
+}
+
+given complexCondition: Condition ← field operator values
+given frequentOverride: Override ← overridetext lockout spec
+
+monitor {
+  trigger1 trigger2 trigger3
+} when {
+  all {
+    condition 1
+    condition 2
+    condition 3 except {
+      specific exception
+    }
+    any {
+      option 1
+      option 2 except { anotherexception }
+      option 3
+    } except {
+      any {
+        exception 1
+        exception 2
+      }
+    }
+  } except {
+    all {
+      exception 1
+      exception 1
+      exception 1
+    }
+  } except { exception 1 }
+} then {
+  show alert1 withOverride {
+    "contraindication exists" lockout default
+  } withOverride {
+    "different contraindication exists" lockout 10 hours
+  } withDefaultOverride
+}
+
+keywords: type monitor given when all any except show
+
+========================
+
+A set of interventions is defined, thus is the system configured. Trigger events are emitted into
+the system, monitoring interventions check their condition sets, upon matching actions are taken
